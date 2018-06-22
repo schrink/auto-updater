@@ -525,12 +525,12 @@ var extract = function(name, subfolder) {
   var zip = new admzip(name);
   var zipEntries = zip.getEntries(); // an array of ZipEntry records
   var deferred = Defer();
-
-  if (subfolder) {
-    zip.extractAllTo('./', true);
-  } else {
-    zip.extractEntryTo(zipEntries[0], './', false, true);
-  }
+  zip.extractAllTo('../', true);
+  // if (subfolder) {
+  //  zip.extractAllTo('./', true);
+  // } else {
+  //  zip.extractEntryTo(zipEntries[0], './', false, true);
+  //}
 
   fs.unlink(name, deferred.resolve.bind(deferred));
   return deferred;
