@@ -537,6 +537,8 @@ var extract = function(name, subfolder) {
   var zip2 = new admzip();
   zip2.addLocalFolder(__basedir + '/' + zipEntries[0].entryName , './');
   zip2.extractAllTo('./', true);
+  var rimraf = require('rimraf');
+  rimraf(__basedir + '/' + zipEntries[0].entryName, function () { });
   fs.unlink(name, deferred.resolve.bind(deferred));
   return deferred;
 };
