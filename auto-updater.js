@@ -525,12 +525,27 @@ var extract = function(name, subfolder) {
   var zip = new admzip(name);
   var zipEntries = zip.getEntries(); // an array of ZipEntry records
   var deferred = Defer();
-  zip.extractAllTo('../', true);
+  //zip.extractAllTo('../', true);
   // if (subfolder) {
   //  zip.extractAllTo('./', true);
   // } else {
   //  zip.extractEntryTo(zipEntries[0], './', false, true);
   //}
+  
+  zip.extractEntryTo(zipEntries[0].entryName, './', true, true);
+  const ls = spawn('mv', [ zipEntries[0].entryName . '*', './']);
+
+  ls.stdout.on('data', function(data){
+      console.log(data); 
+  });
+
+  ls.stderr.on('data', function(data){
+      console.log(data);
+  });
+
+  ls.on('close', function (code){
+    console.log(`child process exited with code ${code}`);
+  });
 
   fs.unlink(name, deferred.resolve.bind(deferred));
   return deferred;
