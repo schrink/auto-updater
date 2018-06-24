@@ -533,20 +533,10 @@ var extract = function(name, subfolder) {
   //}
   
   zip.extractEntryTo(zipEntries[0].entryName, './', true, true);
-  const ls = spawn('mv', [ zipEntries[0].entryName . '*', './']);
-
-  ls.stdout.on('data', function(data){
-      console.log(data); 
-  });
-
-  ls.stderr.on('data', function(data){
-      console.log(data);
-  });
-
-  ls.on('close', function (code){
-    console.log(`child process exited with code ${code}`);
-  });
-
+  zip.extractEntryTo(zipEntries[0].entryName, './', true, true);
+  var zip2 = new admzip();
+  zip2.addLocalFolder(__basedir + '/' + zipEntries[0].entryName , './');
+  zip2.extractAllTo('./', true);
   fs.unlink(name, deferred.resolve.bind(deferred));
   return deferred;
 };
