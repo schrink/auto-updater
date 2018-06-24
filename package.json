@@ -10,7 +10,8 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "node-promise": "^0.5.12",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "rimraf": "^2.6.2"
   },
   "keywords": [
     "auto-updater",
